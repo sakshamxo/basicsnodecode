@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/AQI.css">
+</head>
+<body>
+    <div id="main">
+        <h1>Air Quality Index</h1>
+        <% if(aqiData === 5){ %>
+         <h3>Dangerous - Do you live in Delhi? The air quality is very hazardous and can lead to health effects on everybody</h3>
+         <% } else if(aqiData === 4){ %>
+        <h3>Unhealthy - Wear a Mask! The air quality is very unhealthy, healthy individuals might experience difficulty in breathing.</h3>
+        <% } else if(aqiData === 3){ %>
+        <h3>Poor - The air quality is high in pollution, sensitive people might experience difficulty in breathing!</h3>
+       <% }else if(aqiData === 2){ %>
+        <h3>Fair - The air quality is okay, sensitive people with severe health issues may avoid staying out for too long!</h3>
+       <% } else { %>
+        <h3>Excellent - Go on a trip! The air quality is good and safe for outdoor activities.</h3>
+        <% } %>
+    </div>
+</body>
+</html>

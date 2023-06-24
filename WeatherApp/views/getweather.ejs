@@ -1,0 +1,146 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./stylesheets/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+  
+  <div id="main">
+    <div id="climecast">
+      <h1>ClimeCast</h1>
+    </div>
+    <div id="search">
+      <form action="/getweather" method="post">
+        <i class="ri-search-line"></i>
+        <input list="citynames" name="citydetail" type="text" placeholder="search">
+        <datalist id="citynames">
+          <option value="Bhopal">Bhopal</option>
+          <option value="Indore">Indore</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="Pune">Pune</option>
+          <option value="Bangalore">Bangalore</option>
+          <option value="London">London</option>
+          <option value="New York">New York</option>
+          <option value="Sagar">Sagar</option>
+          <option value="Udaipur">Udaipur</option>
+          <option value="Agra">Agra</option>
+          <option value="Kanpur">Kanpur</option>
+          <option value="Lucknow">Lucknow</option>
+          <option value="Mangalore">Mangalore</option>
+      </datalist>
+      </form>
+    </div>
+    <div id="weathercard">
+      <a href="/getweather/imperial">Switch units to imperial</a>
+      <div id="class1">
+        <h2><%=weatherData.name%>, <%=weatherData.sys.country%></h2>
+      <img src=<%='http://openweathermap.org/img/wn/'+ weatherData.weather[0].icon+"@2x.png"%>>
+      <h3><%=Math.floor(weatherData.main.temp)%>&#176C</h3>
+      <h3><%=weatherData.weather[0].description%></h3>
+      </div>
+      <div id="flex1">
+        <div id="class3">
+        <h4>RealSense: <%=Math.floor(weatherData.main.feels_like)%>&#176C</h4>
+        <h4>Visibility: <%=weatherData.visibility/1000%>km</h4>
+        <h4>Humidity: <%=weatherData.main.humidity%>%</h4>
+        <h4>Pressure: <%=weatherData.main.pressure%> PA</h4>
+        <h4>Wind: <%=Math.floor(weatherData.wind.speed)*3.60%> km/h <% var directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
+          %><%=directions[Math.round(weatherData.wind.deg/45)%8]%></h4>
+      </div>
+
+      <div id="class2">
+        <h4>Sunrise:<%var sr = new Date(weatherData.sys.sunrise*1000).toLocaleTimeString("en-IN",{
+          timeStyle: "short"})%><%=sr%></h4>
+        <h4>Sunset:<%var ss = new Date(weatherData.sys.sunset*1000).toLocaleTimeString("en-IN",{
+          timeStyle: "short"})%><%=ss%></h4>
+      </div>
+      </div>
+      <div id="class4">
+        <div class="time">
+          <h4><%var future = fiveDayWeather.list[0].dt_txt.split(/[-: ]+/); %><%=future[2];%>/<%=future[1];%></h4>
+          <img src=<%='http://openweathermap.org/img/wn/'+ fiveDayWeather.list[0].weather[0].icon+".png"%>>
+          <h4><%=Math.floor(fiveDayWeather.list[0].main.temp)%>&#176C</h4>
+        </div>
+        <div class="time">
+          <h4><%var future = fiveDayWeather.list[7].dt_txt.split(/[-: ]+/); %><%=future[2];%>/<%=future[1];%></h4>
+          <img src=<%='http://openweathermap.org/img/wn/'+ fiveDayWeather.list[7].weather[0].icon+".png"%>>
+          <h4><%=Math.floor(fiveDayWeather.list[7].main.temp)%>&#176C</h4>
+        </div>
+        <div class="time">
+          <h4><%var future = fiveDayWeather.list[15].dt_txt.split(/[-: ]+/); %><%=future[2];%>/<%=future[1];%></h4>
+          <img src=<%='http://openweathermap.org/img/wn/'+ fiveDayWeather.list[15].weather[0].icon+".png"%>>
+          <h4><%=Math.floor(fiveDayWeather.list[15].main.temp)%>&#176C</h4>
+        </div>
+        <div class="time">
+          <h4><%var future = fiveDayWeather.list[23].dt_txt.split(/[-: ]+/); %><%=future[2];%>/<%=future[1];%></h4>
+          <img src=<%='http://openweathermap.org/img/wn/'+ fiveDayWeather.list[23].weather[0].icon+".png"%>>
+          <h4><%=Math.floor(fiveDayWeather.list[23].main.temp)%>&#176C</h4>
+        </div>
+        <div class="time">
+          <h4><%var future = fiveDayWeather.list[31].dt_txt.split(/[-: ]+/); %><%=future[2];%>/<%=future[1];%></h4>
+          <img src=<%='http://openweathermap.org/img/wn/'+ fiveDayWeather.list[31].weather[0].icon+".png"%>>
+          <h4><%=Math.floor(fiveDayWeather.list[31].main.temp)%>&#176C</h4>
+        </div>
+      </div>
+    
+    </div>
+    <h3 id="facts"></h3>
+  </div>
+  <script>
+    var scenery = document.querySelector("#main")
+    if("<%-weatherData.weather[0].main%>" === undefined){
+      
+      scenery.style.backgroundImage = "url(/images/Default.jpg)"
+    }
+    else{
+      scenery.style.backgroundImage = "url(/images/<%-weatherData.weather[0].main%>.jpg)"
+    }
+    // console.log(<%=weatherData%>)
+  </script>
+
+  <script>
+    var facts = [
+    "You can tell the temperature by counting a cricket’s chirps!",
+    "Sandstorms can swallow up entire cities.",
+    "Dirt mixed with wind can make dust storms called black blizzards.",
+    "A mudslide can carry rocks, trees, vehicles and entire buildings!",
+    "The coldest temperature ever officially recorded was -89.2°C. Brrrr!",
+    "Mild autumn weather often means bigger spiders in our homes.",
+    "A heatwave can make train tracks bend!",
+    "About 2,000 thunderstorms rain down on Earth every minute.",
+    "A 2003 heatwave turned grapes to raisins before they were picked from the vine!",
+    " Lightning often follows a volcanic eruption.",
+    "Raindrops can be the size of a housefly and fall at more than 30kmph.",
+    "Cape Farewell in Greenland is the windiest place on the planet.",
+    "Hurricanes can push more than 6m of water ashore.",
+    "In July 2001 the rainfall in Kerala, India, was blood red!",
+    "Blizzards can make snowflakes feel like pellets hitting your face.",
+    "A hurricane in Florida, USA, caused 900 captive pythons to escape.",
+    "Worms wriggle up from underground when a flood is coming.",
+    "A thunderstorm can produce 160kmph winds!",
+    "In Antarctica, snow can fall so hard you can’t see your hand in front of your face.",
+    "A whiteout or heavy snowfall that makes it difficult to see, can make you feel sick.",
+    "Wildfires sometimes create tornadoes made of fire called fire whirls.",
+    "In 1972, a blizzard dumped 8m of snowfall on Iran, burying 200 villages.",
+    "Some tornadoes can be faster than formula one racing cars!",
+    "Black ice, a transparent coating of ice on a surface, can make pavements super-slippery.",
+    "Some frogs get noisier just before it rains.",
+    "In 525 BC a sandstorm buried hundreds of soldiers in an Egyptian desert.",
+    "Waterspouts, or rotating columns of air over water, can make sea creatures rain down from the sky.",
+    "The most damage ever caused by a thunderstorm was in 1995, when hailstones bigger than cricket balls fell in Texas, USA.",
+    "In 1684, it was so cold that the River Thames froze solid for two months.",
+    "Cats and dogs have been known to sense when a tornado is approaching."
+    ]
+
+    var random = Math.floor(Math.random()*30) ;
+    
+    document.querySelector("#facts").innerHTML = "Random Fact: "+facts[random];
+  </script>
+  <script> </script>
+</body>
+</html>

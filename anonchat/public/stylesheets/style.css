@@ -1,0 +1,102 @@
+/* Chat container styles */
+.chat-container {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Chat message styles */
+.chat-message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.chat-message img {
+  border-radius: 50%;
+  height: 2rem;
+  margin-right: 1rem;
+  width: 2rem;
+}
+
+.chat-message .message-text {
+  background-color: #f1f0f0;
+  border-radius: 1rem;
+  color: #333;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.chat-message .message-text.sent {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* Input field and send button styles */
+.chat-input {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.chat-input input[type="text"] {
+  background-color: #f1f0f0;
+  border-radius: 1rem;
+  border: none;
+  flex: 1;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.chat-input button[type="submit"] {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 1rem;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 1rem;
+  padding: 1rem 2rem;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .chat-container {
+    max-width: 100%;
+    padding: 1rem 2rem;
+  }
+
+  .chat-input input[type="text"] {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .chat-input button[type="submit"] {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .chat-message img {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  .chat-message .message-text {
+    font-size: 0.8rem;
+    padding: 0.8rem;
+  }
+
+  .chat-input input[type="text"] {
+    font-size: 0.7rem;
+    padding: 0.3rem;
+  }
+
+  .chat-input button[type="submit"] {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
+  }
+}
